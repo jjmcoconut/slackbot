@@ -1,0 +1,5 @@
+requests
+beautifulsoup4
+slack_sdk
+schedule
+python-dotenv
