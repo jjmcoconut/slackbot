@@ -1,5 +1,6 @@
 requests
 beautifulsoup4
 slack_sdk
+slack_bolt
 schedule
 python-dotenv
