@@ -17,8 +17,7 @@ load_dotenv()
 
 SLACK_BOT_TOKEN = os.getenv("SLACK_BOT_TOKEN")
 SLACK_APP_TOKEN = os.getenv("SLACK_APP_TOKEN")
-JOB_CHANNEL = os.getenv("SLACK_JOB_CHANNEL_ID") or "C04N51UG7DY"
-PAPER_CHANNEL = os.getenv("SLACK_CHANNEL_ID") or "C04J1LKCK1S"
+CHANNEL = os.getenv("SLACK_JOB_CHANNEL_ID") or "C04N51UG7DY"
 
 app = App(token=SLACK_BOT_TOKEN)
 client = WebClient(token=SLACK_BOT_TOKEN)
@@ -77,7 +76,7 @@ def send_job_message(job):
         {"type": "divider"},
     ]
     try:
-        client.chat_postMessage(channel=JOB_CHANNEL, blocks=blocks, text=f"New Job: {job['title']}")
+        client.chat_postMessage(channel=CHANNEL, blocks=blocks, text=f"New Job: {job['title']}")
     except SlackApiError as e:
         print(f"Error sending job message: {e.response['error']}")
 
@@ -308,7 +307,7 @@ def check_new_papers(seen_papers):
     if found_any:
         save_seen_papers(seen_papers)
         try:
-            client.chat_postMessage(channel=PAPER_CHANNEL, blocks=all_blocks, text="New papers found!")
+            client.chat_postMessage(channel=CHANNEL, blocks=all_blocks, text="New papers found!")
         except SlackApiError as e:
             print(f"Error sending paper message: {e.response['error']}")
     else:
@@ -389,7 +388,7 @@ def send_random_papers():
             {"type": "divider"},
         ]
         try:
-            client.chat_postMessage(channel=PAPER_CHANNEL, blocks=blocks, text=f"Random Paper: {paper['title']}")
+            client.chat_postMessage(channel=CHANNEL, blocks=blocks, text=f"Random Paper: {paper['title']}")
         except SlackApiError as e:
             print(f"Error sending random paper: {e.response['error']}")
         time.sleep(random.uniform(3, 7))
