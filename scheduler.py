@@ -63,7 +63,7 @@ def random_paper_task(client):
         time.sleep(random.uniform(3, 7))
 
 def run_scheduler(client):
-    schedule.every(1).minutes.do(job_check_task, client)
+    schedule.every(6).hours.do(job_check_task, client)
     schedule.every(6).hours.do(paper_check_task, client)
     schedule.every().monday.at("09:00").do(random_paper_task, client)
 
